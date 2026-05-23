@@ -1,7 +1,8 @@
 import { GlitchText } from '@/components/ui/GlitchText';
-import { CyberButton } from '@/components/ui/CyberButton';
 import { CyberInput } from '@/components/ui/CyberInput';
-import { GhostLogo } from '@/components/ui/GhostLogo';
+import React from 'react';
+import { Fingerprint } from 'lucide-react';
+import Link from 'next/link';
 
 export default function LoginPage() {
   return (
@@ -10,7 +11,9 @@ export default function LoginPage() {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,255,128,0.1)_0%,transparent_50%)] animate-pulse-slow"></div>
       
       <div className="z-10 w-full max-w-md p-8 bg-black/50 border border-primary/30 backdrop-blur-md rounded-lg shadow-[0_0_50px_rgba(0,255,128,0.1)] flex flex-col items-center">
-        <GhostLogo className="w-24 h-24 mb-6 text-primary drop-shadow-[0_0_10px_rgba(0,255,128,0.8)]" />
+        <div className="flex items-center gap-3 mb-6">
+          <Fingerprint className="text-cyan-400 w-12 h-12" />
+        </div>
         
         <h1 className="text-3xl font-bold mb-8 tracking-widest text-white">
           <GlitchText text="GHOST_TRACE" />
