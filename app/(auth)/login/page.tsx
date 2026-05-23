@@ -1,5 +1,8 @@
+"use client";
+
 import { GlitchText } from '@/components/ui/GlitchText';
 import { CyberInput } from '@/components/ui/CyberInput';
+import { GlowButton } from '@/components/ui/GlowButton';
 import React from 'react';
 import { Fingerprint } from 'lucide-react';
 import Link from 'next/link';
@@ -36,9 +39,9 @@ export default function LoginPage() {
             />
           </div>
           
-          <CyberButton type="submit" className="w-full mt-4" variant="primary">
+          <GlowButton type="submit" className="w-full mt-4" variant="primary">
             INITIALIZE_UPLINK
-          </CyberButton>
+          </GlowButton>
         </form>
         
         <div className="mt-8 text-xs text-primary/60 text-center uppercase tracking-widest">

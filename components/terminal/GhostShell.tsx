@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState, useRef, useEffect } from 'react';
 import TerminalLine from './TerminalLine';
 import { parseCommand } from './CommandParser';
@@ -8,7 +10,7 @@ interface OutputLine {
   type: 'input' | 'output' | 'error' | 'success';
 }
 
-export default function GhostShell() {
+export function GhostShell() {
   const [input, setInput] = useState('');
   const [history, setHistory] = useState<OutputLine[]>([
     { id: Date.now(), text: 'GhostTrace Terminal v1.0.0', type: 'output' },
@@ -82,3 +84,6 @@ export default function GhostShell() {
     </div>
   );
 }
+
+export default GhostShell;
+
