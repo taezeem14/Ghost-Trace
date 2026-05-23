@@ -1,13 +1,32 @@
 "use client";
-import React from 'react';
+import React, { useState } from 'react';
 import { HolographicCard } from '../ui/HolographicCard';
-import { History, ArrowRight } from 'lucide-react';
+import { History, ArrowRight, Loader2 } from 'lucide-react';
 import { useHistoryStore } from '@/store/historyStore';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useOsintScan } from '@/lib/hooks/useOsintScan';
 
 export const RecentTargets = () => {
   const { history } = useHistoryStore();
   const recent = history?.slice(0, 5) || [];
+  const router = useRouter();
+  const { executeScan, isScanning } = useOsintScan();
+  const [loadingTarget, setLoadingTarget] = useState<string | null>(null);
+
+  const handleTargetClick = async (type: string, target: string) => {
+    if (isScanning) return;
+    setLoadingTarget(target);
+    
+    // Auto route based on type
+    if (type === 'domain' || type === 'ip') {
+      router.push(`/${type}/${encodeURIComponent(target)}`);
+    } else {
+      router.push(`/${type}`);
+    }
+
+    await executeScan(target, type as any);
+    setLoadingTarget(null);
+  };
 
   return (
     <HolographicCard className="p-4 flex flex-col gap-4 min-h-[300px]">
@@ -21,9 +40,9 @@ export const RecentTargets = () => {
           <div className="text-cyan-800 text-xs font-mono italic p-2">No recent scans found. Execute a scan to populate history.</div>
         ) : (
           recent.map((entry, idx) => (
-            <Link 
+            <div 
               key={idx} 
-              href={`/${entry.type === 'email' || entry.type === 'username' ? 'dashboard' : entry.type}/${encodeURIComponent(entry.target)}`}
+              onClick={() => handleTargetClick(entry.type, entry.target)}
               className="flex justify-between items-center bg-black/40 p-3 rounded border border-cyan-900/30 hover:border-cyan-500/50 transition-colors cursor-pointer group"
             >
               <div className="flex flex-col">
@@ -34,9 +53,13 @@ export const RecentTargets = () => {
                 <span className={`text-xs font-mono font-bold ${entry.threatScore > 70 ? 'text-red-400' : entry.threatScore > 30 ? 'text-amber-400' : 'text-emerald-400'}`}>
                   {entry.threatScore}
                 </span>
-                <ArrowRight className="w-4 h-4 text-cyan-800 group-hover:text-cyan-400 transition-colors" />
+                {loadingTarget === entry.target ? (
+                  <Loader2 className="w-4 h-4 text-cyan-400 animate-spin" />
+                ) : (
+                  <ArrowRight className="w-4 h-4 text-cyan-800 group-hover:text-cyan-400 transition-colors" />
+                )}
               </div>
-            </Link>
+            </div>
           ))
         )}
       </div>

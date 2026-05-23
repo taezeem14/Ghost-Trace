@@ -6,12 +6,12 @@ import { useScanStore } from '@/store/scanStore';
 
 export const BreachPanel = () => {
   const { scanResults, activeScan } = useScanStore();
-  const hibp = scanResults?.hibp;
+  const breachesData = scanResults?.breaches;
   const isLoading = activeScan?.status === 'scanning';
 
-  if (!hibp && !isLoading) return null;
+  if (!breachesData && !isLoading) return null;
 
-  const breaches = Array.isArray(hibp?.data) ? hibp.data : [];
+  const breaches = Array.isArray(breachesData) ? breachesData : [];
   const hasBreaches = breaches.length > 0;
 
   return (
@@ -21,11 +21,11 @@ export const BreachPanel = () => {
         <h2 className="text-cyan-100 font-mono text-sm tracking-wider uppercase">Breach Data</h2>
       </div>
       
-      {isLoading && !hibp ? (
+      {isLoading && !breachesData ? (
         <div className="text-cyan-600 font-mono text-xs animate-pulse">Scanning breach databases...</div>
-      ) : hibp?.error ? (
+      ) : breachesData?.error ? (
          <div className="flex items-center gap-2 text-red-400 font-mono text-xs">
-           <AlertCircle className="w-4 h-4" /> {hibp.error}
+           <AlertCircle className="w-4 h-4" /> {breachesData.error}
          </div>
       ) : (
         <>
