@@ -70,6 +70,17 @@ We built this with Next.js 14 App Router and serverless API routes. There are no
 3. In the environment variables section, paste in your API keys (the ones from your `.env.local`).
 4. Click **Deploy**. That's literally it. Your OSINT dashboard is now live and living rent-free on Vercel's servers.
 
+## Eco-Astral Mode (Lag Fix) 🌿
+
+If your old laptop is fighting for its life, click the **leaf icon** 🍃 in the header. It's literally a cheat code for performance:
+
+- **Deletes the Starfield Render Loop**: Stops the Canvas particle animation in its tracks. No more GPU crying.
+- **Cancels Backdrop Filters**: Drops all the resource-heavy `backdrop-blur` GPU filters across the entire app.
+- **Applies Solid Colors**: Swaps out glassmorphic cards for solid high-contrast cards. Still looks clean, just less ✨.
+- **Kills CRT Overlay**: Removes the scanline overlay that was flexing on your framerate.
+
+Your preference is saved to `localStorage` so it remembers you're on that eco grind. Click the leaf again to go back to full drip mode when you're ready.
+
 ## Disclaimer 🚨
 This tool is for bug bounty hunters, researchers, and pentesting systems *you actually own or have permission to test*. Do NOT use this to stalk people. That's weird behavior. Periodt.
 

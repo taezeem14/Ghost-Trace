@@ -62,3 +62,45 @@
     border-color: var(--ghost-cyan);
   }
 }
+
+/* ═══════════════════════════════════════════════
+   Eco-Astral Mode — Performance Cheat Code 🌿
+   ═══════════════════════════════════════════════ */
+
+.eco-mode * {
+  /* Kill all backdrop filters globally */
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.eco-mode .glass-panel {
+  /* Swap glassmorphism for solid high-contrast */
+  background: rgba(10, 10, 10, 0.95) !important;
+  backdrop-filter: none !important;
+  box-shadow: none !important;
+}
+
+.eco-mode header {
+  background: rgba(5, 5, 5, 0.98) !important;
+  backdrop-filter: none !important;
+}
+
+/* Kill text-shadow glow effects */
+.eco-mode .text-shadow-cyan {
+  text-shadow: none !important;
+}
+
+/* Kill glow box-shadow effects */
+.eco-mode .glow-cyan {
+  box-shadow: none !important;
+}
+
+/* Swap holographic cards for solid cards */
+.eco-mode [class*="bg-black/40"] {
+  background-color: rgb(10, 10, 10) !important;
+}
+
+.eco-mode [class*="bg-black/50"] {
+  background-color: rgb(8, 8, 8) !important;
+}
+

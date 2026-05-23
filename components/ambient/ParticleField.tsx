@@ -1,10 +1,24 @@
 "use client";
 import React, { useEffect, useRef } from 'react';
+import { useUiStore } from '@/store/uiStore';
 
 export const ParticleField: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const animationRef = useRef<number>(0);
+  const ecoMode = useUiStore((s) => s.ecoMode);
 
   useEffect(() => {
+    // Kill the render loop immediately in eco mode
+    if (ecoMode) {
+      cancelAnimationFrame(animationRef.current);
+      const canvas = canvasRef.current;
+      if (canvas) {
+        const ctx = canvas.getContext('2d');
+        ctx?.clearRect(0, 0, canvas.width, canvas.height);
+      }
+      return;
+    }
+
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -28,7 +42,7 @@ export const ParticleField: React.FC = () => {
           y: Math.random() * canvas.height,
           size: Math.random() * 1.5 + 0.5,
           speedX: (Math.random() - 0.5) * 0.3,
-          speedY: Math.random() * -0.5 - 0.1, // Float up
+          speedY: Math.random() * -0.5 - 0.1,
           opacity: Math.random() * 0.5 + 0.1,
         });
       }
@@ -36,7 +50,7 @@ export const ParticleField: React.FC = () => {
 
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      
+
       particles.forEach((p) => {
         p.x += p.speedX;
         p.y += p.speedY;
@@ -50,23 +64,29 @@ export const ParticleField: React.FC = () => {
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(6, 182, 212, ${p.opacity})`; // Cyan colored particles
+        ctx.fillStyle = `rgba(6, 182, 212, ${p.opacity})`;
         ctx.fill();
       });
 
-      requestAnimationFrame(animate);
+      animationRef.current = requestAnimationFrame(animate);
     };
 
     init();
     animate();
 
     window.addEventListener('resize', resize);
-    return () => window.removeEventListener('resize', resize);
-  }, []);
+    return () => {
+      window.removeEventListener('resize', resize);
+      cancelAnimationFrame(animationRef.current);
+    };
+  }, [ecoMode]);
+
+  // Don't even mount the canvas in eco mode
+  if (ecoMode) return null;
 
   return (
-    <canvas 
-      ref={canvasRef} 
+    <canvas
+      ref={canvasRef}
       className="fixed inset-0 pointer-events-none z-0 opacity-40"
     />
   );

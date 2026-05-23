@@ -1,7 +1,11 @@
+"use client";
 import React from 'react';
-import { Search, Bell, Hexagon } from 'lucide-react';
+import { Search, Bell, Hexagon, Leaf } from 'lucide-react';
+import { useUiStore } from '@/store/uiStore';
 
 export const TopBar = () => {
+  const { ecoMode, toggleEcoMode } = useUiStore();
+
   return (
     <header className="h-16 w-full bg-black/50 backdrop-blur-md border-b border-cyan-900/50 flex items-center justify-between px-6 pl-20 z-40 fixed top-0">
       <div className="flex items-center gap-3">
@@ -18,6 +22,24 @@ export const TopBar = () => {
             readOnly
           />
         </div>
+
+        {/* Eco-Astral Mode Toggle */}
+        <button
+          id="eco-astral-toggle"
+          onClick={toggleEcoMode}
+          title={ecoMode ? 'Disable Eco-Astral Mode' : 'Enable Eco-Astral Mode (Lag Fix)'}
+          className={`relative p-2 rounded-md transition-all duration-300 ${
+            ecoMode
+              ? 'bg-green-500/20 text-green-400 border border-green-500/50 shadow-[0_0_12px_rgba(34,197,94,0.3)]'
+              : 'text-cyan-600 hover:text-cyan-400 border border-transparent hover:border-cyan-800'
+          }`}
+        >
+          <Leaf className="w-5 h-5" />
+          {ecoMode && (
+            <span className="absolute -top-1 -right-1 w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+          )}
+        </button>
+
         <button className="text-cyan-600 hover:text-cyan-400 transition-colors">
           <Bell className="w-5 h-5" />
         </button>
