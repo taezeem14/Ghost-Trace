@@ -4,7 +4,8 @@ import { cn } from '@/lib/utils';
 export type StatusLevel = 'clean' | 'low' | 'moderate' | 'high' | 'critical';
 
 interface StatusPillProps {
-  level: StatusLevel;
+  level?: StatusLevel;
+  status?: StatusLevel;
   className?: string;
   label?: string;
 }
@@ -17,8 +18,9 @@ const statusConfig: Record<StatusLevel, { bg: string, text: string, border: stri
   critical: { bg: 'bg-red-950/30', text: 'text-red-400', border: 'border-red-500/50', glow: 'shadow-[0_0_10px_rgba(239,68,68,0.3)] animate-pulse' },
 };
 
-export const StatusPill: React.FC<StatusPillProps> = ({ level, className, label }) => {
-  const config = statusConfig[level];
+export const StatusPill: React.FC<StatusPillProps> = ({ level, status, className, label }) => {
+  const resolvedLevel = level ?? status ?? 'clean';
+  const config = statusConfig[resolvedLevel] || statusConfig['clean'];
   return (
     <span
       className={cn(
@@ -28,7 +30,7 @@ export const StatusPill: React.FC<StatusPillProps> = ({ level, className, label 
       )}
     >
       <span className={cn("w-1.5 h-1.5 rounded-full mr-1.5 bg-current")} />
-      {label || level}
+      {label || resolvedLevel}
     </span>
   );
 };

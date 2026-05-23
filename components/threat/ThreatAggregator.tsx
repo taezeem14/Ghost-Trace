@@ -262,7 +262,7 @@ export function ThreatAggregator() {
                       <span className="text-[10px] bg-neutral-800 text-neutral-400 border border-neutral-700 px-1.5 py-0.5 rounded uppercase">
                         {threat.category}
                       </span>
-                      <StatusPill status={threat.severity} />
+                      <StatusPill level={threat.severity} />
                     </div>
                   </div>
                 ))}

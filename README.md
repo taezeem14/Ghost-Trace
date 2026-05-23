@@ -1,81 +1,68 @@
 <div align="center">
-  <h1>💀 GhostTrace 💀</h1>
-  <p><b>Real OSINT Intelligence & Reconnaissance Platform. No cap.</b></p>
+  <h1>GhostTrace</h1>
+  <p><b>OSINT and reconnaissance tooling with a clean, modern interface.</b></p>
   <p>
+    <a href="#overview">Overview</a> •
     <a href="#features">Features</a> •
-    <a href="#api-keys-needed-the-sauce">APIs</a> •
-    <a href="#eco-astral-mode-lag-fix">Eco-Astral Mode</a> •
-    <a href="#deploying-to-vercel-w">Deployment</a>
+    <a href="#environment-variables">Environment</a> •
+    <a href="#performance-mode">Performance</a> •
+    <a href="#deployment">Deployment</a>
   </p>
 </div>
 
 ---
 
-## 📖 Short Description
-GhostTrace is a production-grade, Vercel-compatible OSINT (Open Source Intelligence) platform. It’s basically a cheat code for bug bounty hunters, ethical hackers, and security researchers to map out attack surfaces, hunt down subdomains, and track digital footprints—all wrapped in a sick cyberpunk UI. 
+## Overview
+GhostTrace is a production-grade, Vercel-compatible OSINT platform for security researchers, bug bounty hunters, and defenders who need fast surface mapping without unnecessary friction. It focuses on practical reconnaissance workflows, live intelligence views, and a polished cyber UI that still feels usable.
 
 **Topics:** `osint` `reconnaissance` `cybersecurity` `nextjs` `bug-bounty` `pentesting` `react` `typescript`
 
----
+## Features
+- Real data sources, not placeholder demos.
+- GhostShell terminal for interactive recon workflows in the browser.
+- Infrastructure graph views for IPs, domains, ASNs, and related assets.
+- Threat scoring and telemetry panels for faster triage.
+- Built for modern Next.js deployment on Vercel.
 
-## 🚀 Features (Why it slaps)
-- **Real APIs Only:** No fake mocked data. It pulls actual OSINT from the wild.
-- **GhostShell Terminal:** Integrated command-line interface directly in your browser.
-- **Visual Infrastructure Graph:** ReactFlow nodes that map out IPs, domains, and ASNs visually.
-- **Vercel Compatible:** Zero weird Python backends to host. Everything runs on Next.js serverless edge.
-- **Threat Scoring:** Calculates risk levels (0-100) based on real threat intel.
-
----
-
-## 🔑 API Keys Needed (The Sauce)
-GhostTrace is designed to be plug-and-play, but to unlock God Mode, you'll need some API keys. Drop these into your `.env.local` file:
+## Environment Variables
+GhostTrace works out of the box for several workflows, but the full experience improves with API keys. Add the following to your `.env.local` file:
 
 ```env
-# 🟢 FREE / KEYLESS (Already built-in, no key required)
-# - XposedOrNot (Breaches) - Replaced HIBP!
-# - Native Username Sherlock Engine (Parallel scanning)
-# - crt.sh (Subdomains)
-# - HackerTarget (Port scans, Traceroutes)
+# Free or keyless sources already supported
+# - XposedOrNot for breach checks
+# - Native username enumeration
+# - crt.sh for subdomains
+# - HackerTarget for port scans and traceroutes
 
-# 🟡 OPTIONAL BUT RECOMMENDED (Get these keys to go crazy)
-SECURITY_TRAILS_API_KEY=your_key_here     # God-tier subdomain enumeration
-VIRUSTOTAL_API_KEY=your_key_here          # Malware and threat intel scoring
-ABUSEIPDB_API_KEY=your_key_here           # IP reputation
-URLSCAN_API_KEY=your_key_here             # Screenshot and DOM analysis
-HUNTER_API_KEY=your_key_here              # Email hunting
+# Optional but recommended
+SECURITY_TRAILS_API_KEY=your_key_here
+VIRUSTOTAL_API_KEY=your_key_here
+ABUSEIPDB_API_KEY=your_key_here
+URLSCAN_API_KEY=your_key_here
+HUNTER_API_KEY=your_key_here
 ```
 
----
+## Performance Mode
+If your machine starts sounding like it is negotiating with gravity, enable Eco-Astral mode from the top header.
 
-## 🌿 Eco-Astral Mode (Lag Fix)
-If your old laptop is fighting for its life and the fans sound like a jet engine, **click the leaf icon 🍃 in the top header**. 
+It reduces visual load by disabling the starfield animation, removing expensive backdrop blur, and switching heavy translucent surfaces to solid cards. The goal is simple: keep the experience sharp without making the browser work overtime.
 
-**What it does:**
-- **Deletes the Starfield Render Loop:** Stops the `<canvas>` animation in its tracks.
-- **Cancels Backdrop Filters:** Drops the resource-heavy GPU blur/glassmorphism filters.
-- **Applies Solid Colors:** Switches out transparent cards for solid high-contrast dark cards.
+## Deployment
+GhostTrace is ready for Vercel.
 
-It's literally a cheat code for performance. It goes from 30% GPU usage to 0%.
+1. Fork or clone the repository.
+2. Create a new project in [Vercel](https://vercel.com).
+3. Import the GhostTrace repo.
+4. Add the environment variables from the section above.
+5. Deploy.
 
----
+Vercel should auto-detect the Next.js setup and build the app without extra platform-specific config.
 
-## ☁️ Deploying to Vercel (W)
-Since we ripped out the weird Python dependencies and fixed the Next.js configs (`next.config.mjs`), this app is 100% Vercel-ready.
+## Ethics
+Use this tool only on systems you own or have explicit permission to assess.
 
-1. Fork/Clone this repo.
-2. Go to [Vercel](https://vercel.com) and click **Add New Project**.
-3. Import your GhostTrace repository.
-4. **Environment Variables:** Paste your API keys from the section above into Vercel's Environment Variables panel.
-5. Click **Deploy**.
-
-*Vercel will auto-detect the Next.js setup. Once it builds (takes about 2 mins), you'll get a live URL.*
-
----
-
-## ⚠️ Ethical Scope (Don't catch a case)
-This tool is for **Ethical Use Only**. 
-- Bug bounty reconnaissance.
-- Pentesting systems you own or have explicit permission to test.
+- Authorized bug bounty recon.
+- Pentesting scoped systems.
 - Auditing your own digital footprint.
 
-Do NOT use this for stalking, unauthorized surveillance, or doing illegal stuff. The UI enforces a strict "I have authorization" gate before running heavy scans. Be smart.
+Do not use GhostTrace for stalking, unauthorized surveillance, or any activity outside a legitimate security workflow.
