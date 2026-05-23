@@ -36,6 +36,40 @@ It's built with the latest drip:
    ```
    *Server's up on `localhost:3000`. Prepare to be amazed.*
 
+## The Plug (APIs You Need) 🔌
+
+The app degrades gracefully. If you don't have an API key, it just tells you it's not configured instead of crashing like a toxic ex. 
+
+**Free Real Estate (No Keys Needed):**
+- WHOIS, DNS & SSL Checker
+- `crt.sh` (Subdomains)
+- Shodan InternetDB (Free IP lookup)
+- `ip-api.com` (Geolocation)
+- BGPView (ASN lookup)
+- HackerTarget (Port scan / Traceroute free tier)
+
+**Premium Drip (Requires Keys in `.env.local`):**
+- **VirusTotal**: For that deep malware analysis.
+- **AbuseIPDB**: To catch those malicious IPs in 4K.
+- **SecurityTrails**: The ultimate subdomain plug.
+- **AlienVault OTX**: Threat pulses.
+- **URLScan.io**: Screenshotting sketchy sites safely.
+- **Hunter.io**: Finding corporate emails.
+- **HaveIBeenPwned**: Checking if your email is on the dark web.
+
+*Just copy `.env.local.example` to `.env.local` and paste whatever keys you have. We don't judge.*
+
+## Vercel Deployment (Yes, it's compatible) 🚀
+
+Is it Vercel compatible? **100% yes. No cap.** 
+We built this with Next.js 14 App Router and serverless API routes. There are no heavy long-running background processes or weird native binaries that Vercel hates. Everything is stateless and fetched on demand.
+
+### How to push to production:
+1. Push your code to a GitHub repo.
+2. Go to [Vercel](https://vercel.com), hit **"Add New Project"**, and import your repo.
+3. In the environment variables section, paste in your API keys (the ones from your `.env.local`).
+4. Click **Deploy**. That's literally it. Your OSINT dashboard is now live and living rent-free on Vercel's servers.
+
 ## Disclaimer 🚨
 This tool is for bug bounty hunters, researchers, and pentesting systems *you actually own or have permission to test*. Do NOT use this to stalk people. That's weird behavior. Periodt.
 
