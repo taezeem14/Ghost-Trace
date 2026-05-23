@@ -2,6 +2,7 @@
 import { Sidebar } from '@/components/layout/Sidebar';
 import { TopBar } from '@/components/layout/TopBar';
 import { StatusBar } from '@/components/layout/StatusBar';
+import { CommandBar } from '@/components/layout/CommandBar';
 import { ParticleField } from '@/components/ambient/ParticleField';
 import { GridPlane } from '@/components/ambient/GridPlane';
 import { AmbientNoise } from '@/components/ambient/AmbientNoise';
@@ -15,7 +16,7 @@ export default function DashboardLayout({
   const ecoMode = useUiStore((s) => s.ecoMode);
 
   return (
-    <div className={`flex h-screen bg-black overflow-hidden relative text-slate-300 font-sans ${ecoMode ? 'eco-mode' : ''}`}>
+    <div className={`flex h-screen w-screen bg-black overflow-hidden relative text-slate-300 font-sans ${ecoMode ? 'eco-mode' : ''}`}>
       {/* Ambient layers — completely removed in eco mode */}
       {!ecoMode && (
         <>
@@ -25,12 +26,14 @@ export default function DashboardLayout({
         </>
       )}
 
+      {/* Floating fixed sidebar */}
       <Sidebar />
 
-      <div className="flex flex-col flex-1 z-10 relative">
+      {/* Main Column — offset to the right by w-16 sidebar width (pl-16) to avoid layout overlaps */}
+      <div className="flex flex-col flex-1 h-full min-w-0 z-10 relative pl-16">
         <TopBar />
 
-        <main className={`flex-1 overflow-x-hidden overflow-y-auto p-6 custom-scrollbar ${
+        <main className={`flex-grow overflow-x-hidden overflow-y-auto p-6 custom-scrollbar ${
           ecoMode
             ? 'bg-gray-950'
             : 'bg-black/40 backdrop-blur-sm'
@@ -40,6 +43,9 @@ export default function DashboardLayout({
 
         <StatusBar />
       </div>
+
+      {/* Cmd+K Search Modal overlay */}
+      <CommandBar />
 
       {/* CRT Scanline Overlay — disabled in eco mode */}
       {!ecoMode && (
